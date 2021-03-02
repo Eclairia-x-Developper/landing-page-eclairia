@@ -46,21 +46,21 @@ bulb.addEventListener("click", function(){
     allDark.forEach(el => {
         el.classList.toggle("light");
         if(!el.classList.contains("light")){
-            dropdownIcon.src = "svgs/arrow-down.svg";
+            // dropdownIcon.src = "svgs/arrow-down.svg";
             // searchIcon.src = "svgs/Search-icon.svg";
             appLink.src = "images/app-download.png";
             downloadButton.src= "svgs/download.svg";
-            emailIcon.src = "svgs/email-icon.svg";
-            phoneIcon.src = "svgs/phone-icon.svg";
-            voiceIcon.src = "svgs/voice-icon.svg";
+            // emailIcon.src = "svgs/email-icon.svg";
+            // phoneIcon.src = "svgs/phone-icon.svg";
+            // voiceIcon.src = "svgs/voice-icon.svg";
         } else {   
-            dropdownIcon.src = "svgs/arrow-down-light.svg";
+            // dropdownIcon.src = "svgs/arrow-down-light.svg";
             // searchIcon.src = "svgs/Search-light.svg";
             appLink.src = "images/app-download-light.png";
             downloadButton.src= "svgs/download-light.svg";
-            emailIcon.src = "svgs/frame49-light.svg";
-            phoneIcon.src = "svgs/frame50-light.svg";
-            voiceIcon.src = "svgs/voice-light.svg";
+            // emailIcon.src = "svgs/frame49-light.svg";
+            // phoneIcon.src = "svgs/frame50-light.svg";
+            // voiceIcon.src = "svgs/voice-light.svg";
         }
         console.log(el);
         
