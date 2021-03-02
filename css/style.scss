@@ -1,0 +1,955 @@
+/************************************
+       COLORS
+***************************************/
+$white: rgba(255, 255, 255, 1);
+$bg-body: rgb(0, 10, 46);
+$primary: rgba(241,15,71,1);
+$bg-input-search: rgba(9,17,51,1);
+$bg-input-email: rgba(19,30,71,1);
+$color-input-email: rgba(52,120,247,1);
+$bg-search-icon: rgba(0,7,34,1);
+$color-input-search: rgba(66,86,164,1);
+$bg-ellipse3: rgba(2, 16, 65,.3);
+$bg-ellipse1: rgba(1, 17, 77, .4);
+$border-image: rgb(0, 14, 69);
+$bg-button-send-email: rgba(210,226,255,1);
+$color-input-email: rgba(52,120,247,1);
+$color-input-search: rgba(66,86,164,1);
+$box-before-after: rgba(14,2,63,1);
+$bg-presse: rgb(0, 7, 34);
+
+$bg-body-light : rgb(245, 245, 245);
+$color-black: rgb(0, 10, 46);
+
+/************************************
+        SHADOWS
+***************************************/
+$shadow-ellipses: 0px 8px 40px rgba(0, 0, 0, 0.05), 0px 4px 12px rgba(0, 0, 0, 0.12);
+$shadow-card: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$shadow-voice-btn : 0px -2px 4px rgba(0, 0, 0, 0.11), 0px 3px 10px rgba(0, 10, 46, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12);
+$shadow-bulb : 0px -2px 18px rgba(255, 255, 255, 0.11), 0px 3px 10px rgba(255, 255, 255, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12);
+/************************************
+        GRADIENT COLORS
+***************************************/
+$mango: linear-gradient(324.11deg, #8A30E3 1.35%, #EE6BA1 56.42%, #EAC893 96.38%), linear-gradient(137.64deg, #E8EFF4 0%, #E6ECF0 97.97%), #C4C4C4;
+$green-blue: linear-gradient(125.68deg, #00BA88 27.43%, #065AFC 128.44%);
+$orange: linear-gradient(145.83deg, #F10F47 0%, #FFFA80 134.83%);
+$card-voice: linear-gradient(0deg, rgba(241, 15, 71, 0.1), rgba(241, 15, 71, 0.1)), linear-gradient(137.64deg, rgba(232, 239, 244, 0.1) 0%, rgba(230, 236, 240, 0.1) 97.97%), rgba(196, 196, 196, 0.1);
+
+/************************************
+        @MIXINS
+***************************************/
+@mixin flexbox($align-items, $justify-content, $flex-direction) {
+    display: flex;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    flex-direction: $flex-direction;
+}
+
+@mixin font-face($family, $url) {
+    $url : "../fonts/SofiaPro-"+$url+".ttf";
+    @font-face {
+        font-family: quote($family);
+        src: url($url);
+    }
+}
+
+@mixin typography($size, $weight) {
+    font-size: $size;
+    font-weight: $weight;
+}
+@mixin position($left, $top, $right, $botttom, $translate) {
+    left: $left;
+    top: $top;
+    right: $right;
+    bottom: $botttom;
+    @if $translate == y {
+        transform: translateY(-50%);
+    }
+    @else if $translate == x {
+        transform: translateX(-50%);
+    }
+    @else {
+        transform: none;
+    }
+}
+
+
+
+
+@include font-face(SofiaPro, Light);
+@include font-face(Sofia Pro Bold, Bold);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    list-style: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+body {
+    background-color: $bg-body;
+    color: $white;
+    position: relative;
+
+    &.light {
+        background-color: $bg-body-light;
+        color: $color-black;
+    }
+
+    &.active {
+        height: 100vh;
+        overflow: hidden;
+    }
+}
+
+/************************************
+        CONTAINER STYLE
+***************************************/
+.container {
+    margin: 80px auto;
+    width: 90%;
+    font-family: "SofiaPro";
+
+    @media screen and (max-width: 700px){
+        margin: 60px auto;
+        // position: relative;
+    }
+}
+
+/************************************
+        HEADER STYLE
+***************************************/
+header {
+    // border: 2px solid $primary;
+    @include flexbox(center, space-between, row);
+
+    .logo {
+        // border: 2px solid $primary;
+        @include flexbox(center, space-between, row);
+
+        .text-logo {
+            margin-left: 16px;
+            @include typography(28px, 600);
+        }
+    }
+
+    nav {
+        width: 72%;
+        @include typography(16px, 500);
+
+        &.light {
+            background-color: $bg-body-light;
+        }
+        .navbar {
+            // border: 2px solid $primary;
+            @include flexbox(center, space-between, row);
+            
+            &>li:first-child {
+                // border: 2px solid $primary;
+                position: relative;
+
+                a {
+                    @include flexbox(center, center, row);
+                    img {
+                        margin-left: 4px;
+                        width: 22px;
+                        height: 22px;
+                    }
+                }
+
+                .dropdown {
+                    position: absolute;
+                    width: 100%;
+                    top: 25px;
+                    padding: 10px;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all .4s ease;
+                    background-color: $bg-input-search;
+
+                    &.light {
+                        background-color: $white;
+                    }
+
+                    li {
+                        text-align: center;
+                    }
+                }
+                
+
+                &:hover .dropdown{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            .voice-search-form {
+                // border: 2px solid $primary;
+
+                .field-container {
+                    // border: 2px solid blue;
+                    position: relative;
+
+                    input {
+                        width: 272px;
+                        height: 44px;
+                        border-radius: 16px;
+                        padding: 8px 16px;
+                        border: none;
+                        @include typography(18px, 400);
+                        color: $color-input-search;
+                        background-color: $bg-input-search;
+
+                        &.light {
+                            background-color: $white;
+                            color: $color-black;
+
+                            &::placeholder{
+                                color: $color-black;
+                            }
+                        }
+
+                        &::placeholder {
+                            color: $color-input-search;
+                        }
+                    }
+                    .search-icon {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        right: 10px;
+                        background-color: $bg-search-icon;
+                        padding: 3px;
+                        border-radius: 8px;
+                    }
+                }
+            }
+
+            .start-button {
+                background-color: $primary;
+                @include typography(16px, 500);
+                padding: 12px 32px;
+                color: $white;
+                border-radius: 16px;
+            }
+        }
+    }
+
+    .hamburger-button {
+        display: none;
+    }
+
+    @media screen and (max-width: 700px){
+        .logo {
+            // border: 2px solid $primary;
+            img {
+                width: 24px;
+                height: 34px;
+            }
+            .text-logo {
+                @include typography(22px, 600);
+            }
+        }
+
+        nav {
+            transform: scale(0);
+            transition: transform .2s ease;
+
+            &.active {
+                transform: scale(1);
+            }
+            width: 92%;
+            position: absolute;
+            height: 100%;
+            top: 0;
+            @include flexbox(center, center, row);
+            background-color: rgba(0, 0, 46, .92);
+            z-index: 1000;
+            .navbar {
+                @include flexbox(center, space-between, column);
+                height: 50%;
+                width: 100%;
+            }
+        }
+
+        .hamburger-button {
+            display: block;
+            z-index: 1500;
+        }
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            background-color: $primary;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+/************************************
+        MAIN STYLE
+***************************************/
+main {
+    margin: 120px auto 53px;
+
+    /************************************
+            INTRO SECTION STYLE
+    ***************************************/
+    .intro-section {
+        @include flexbox(flex-start, space-between, row);
+        height: 420px;
+        margin-bottom: 120px;
+
+        .text-description {
+            width: 596px;
+            height: 100%;
+            margin-right: 90px;
+
+            .title {
+                font-family: Sofia Pro Bold;
+                @include typography(64px, 700);
+                line-height: 76px;
+
+                .primary-text {
+                    color: $primary;
+                }
+            }
+
+            .text {
+                @include typography(28px, 300);
+                line-height: 37px;
+                margin: 18px auto 80px;
+            }
+        }
+
+        .picture-description {
+            // border: 2px solid $primary;
+            width: 420px;
+            height: 100%;
+            position: relative;
+            @include flexbox(center, center, row);
+
+            .ellipse {
+                border-radius: 50%;
+                box-shadow: $shadow-ellipses;
+                position: absolute;
+
+                
+            }
+            .ellipse-1 {
+                background-color: $bg-ellipse3;
+                width: 100%;
+                height: 100%;
+                &.light {
+                    background-color: $white;
+                }
+            }
+            .ellipse-2 {
+                background-color: $bg-ellipse3;
+                width: 73%;
+                height: 73%;
+                &.light {
+                    background-color: $white;
+                }
+            }
+            .ellipse-3 {
+                background-color: $bg-ellipse1;
+                width: 48%;
+                height: 48%;
+                &.light {
+                    background-color: $white;
+                }
+
+                .image {
+                    // border: 2px solid $primary;
+                    @include flexbox(center, center, column);
+                    position: absolute;
+                    cursor: pointer;
+
+                    &.left {
+                        @include position(-55%, 50%, auto, auto, y);
+                    }
+                    &.top {
+                        @include position(50%, -55%, auto, auto, x);
+                    }
+                    &.right {
+                        @include position(auto, 50%, -55%, auto, y);
+                    }
+                    &.bottom {
+                        @include position(50%, auto, auto, -55%, x);
+                    }
+
+                    p {
+                        margin-top: 5px;
+                    }
+
+                    .user-image {
+                        border-radius: 50%;
+                        border: 3px solid $border-image;
+                    }
+                    .play-icon {
+                        display: none;
+                    }
+                    &.active {
+
+                        .primary-border {
+                            border: 4px solid $primary;
+                            position: relative;
+                            border-radius: 50%;
+                            @include flexbox(center, center, row);
+    
+                            .play-icon{
+                                display: block;
+                                background-color: $primary;
+                                border-radius: 50%;
+                                position: absolute;
+                                @include position(50%, auto, auto, -15%, x);
+                            }
+                        }
+                    }
+                }
+               
+            }
+            .intelligence {
+                z-index: 2;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+
+            @include flexbox(center, center, column);
+            height: auto;
+            
+            .text-description {
+                text-align: center;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 64px;
+    
+                .title {
+                    @include typography(42px, 700);
+                    line-height: 52px;
+                }
+    
+                .text {
+                    @include typography(16px, 300);
+                    line-height: 23px;
+                    margin: 18px auto 40px;
+                }
+            }
+
+            .picture-description {
+                width: 100%;
+                height: 335px;
+    
+                .ellipse-3 {
+                    // border: 2px solid $primary;
+                    .image {
+                        
+                        &.left, &.top, &.bottom {
+                            // border: 2px solid $primary;
+                            img.user-image {
+                                width: 64px;
+                                height: 64px;
+                            }
+                        }
+                        &.right {
+                            img.user-image {
+                                width: 72px;
+                                height: 72px;
+                            }
+                        }
+
+                        p {
+                            width: max-content;
+                            @include typography(13px, 500);
+                        }
+                    }
+                   
+                }
+                .intelligence {
+                    width: 45%;
+                }
+            }
+            
+        }
+    }
+
+
+    /************************************
+            TEAM SECTION STYLE
+    ***************************************/
+    .team-section {
+        // border: 2px solid $primary;
+        margin-bottom: 120px;
+        @include flexbox(center, space-between, row);
+
+        .team-members-cards-infos {
+            // border: 2px solid $white;
+            margin-left: 35px;
+            margin-right: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+
+            .item {
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                gap: 80px;
+                // border: 2px solid blue;
+                &:nth-child(2){
+                    @include flexbox(center, flex-start, row);
+                }
+
+                .card-member {
+                    // border: 2px solid $primary;
+                    position: relative;
+                    width: 244px;
+                    height: 288px;
+                    @include flexbox(flex-start, space-between, column);
+                    padding: 20px 26px 27px 25px;
+                    border-radius: 44px;
+                    box-shadow: $shadow-card;
+
+                    &.mango {
+                        background: $mango;
+                    }
+                    &.green-blue {
+                        background: $green-blue;
+                    }
+                    &.orange {
+                        background: $orange;
+                    }
+
+                    img.dotted-lines {
+                        position: absolute;
+                        top: 40px;
+                        left: -40px;
+                        z-index: -1;
+                    }
+
+                    .member-infos {
+
+                        .member {
+                            @include flexbox(flex-start, center, row);
+
+                            img {
+                                border-radius: 50%;
+                                margin-right: 10px;
+                                background: $white;
+                            }
+
+                            .infos {
+                                .member-name {
+                                    @include typography(20px, 700);
+                                    margin-bottom: 6px;
+                                }
+                                .work {
+                                    @include typography(14px, 400);
+                                }
+                            }
+                        }
+                    }
+
+                    .member-voice {
+                        @include flexbox(center, space-between, row);
+                        width: 100%;
+                        padding: 0 8px 0 16px;
+                        height: 44px;
+                        border-radius: 16px;
+                        background: $card-voice;
+                        box-shadow: $shadow-ellipses;
+
+                        .play-voice-button {
+                            @include flexbox(center, center, row);
+                            background-color: $primary;
+                            border-radius: 8px;
+                            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.11), 0px 3px 10px rgba(0, 10, 46, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12);
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        .enlighten-your-friend {
+
+            // border: 2px solid red;
+            .illustrations {
+                // border: 2px solid blue;
+                margin-bottom: 26px;
+                @include flexbox(center, flex-end, row);
+
+                .content {
+                    // border: 2px solid red;
+                    position: relative;
+                    width: 445px;
+                    height: 533px;
+
+                    img {
+                        position: absolute;
+                        z-index: 20;
+
+                        &.bulb {
+                            top: 35px;
+                            cursor: pointer;
+                            z-index: 30;
+
+                            &:hover {
+                                box-shadow: $shadow-bulb;
+                                border-radius: 50%;
+                            }
+                        }
+                        &.saly {
+                            // border: 2px solid blue;
+                            width: 100%;
+                            height: 100%;
+                            @include flexbox(center, center, row);
+                        }
+                    }
+
+                    .box {
+                        background-color: $bg-search-icon;
+                        box-shadow: $shadow-voice-btn;
+                        width: 322px;
+                        height: 380px;
+                        position: absolute;
+                        bottom: 0;
+                        border-radius: 44px;
+                        // z-index: -1;
+
+                        &.light {
+                            background-color: $white;
+
+                            &::after, &::before {
+                                    background-color: rgba(196, 196, 196, 0.5);
+                            }
+                        }
+
+                        &::after, &::before {
+                            content: "";
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            background-color: $box-before-after;
+                            border-radius: inherit;
+                            filter: blur(12px);
+                            z-index: -10;
+
+                            
+                        }
+
+                        &::after {
+                            transform: rotate(5deg);
+                        }
+                        &::before {
+                            transform: rotate(-5deg);
+                        }
+                    }
+                }
+            }
+            .text {
+                @include typography(28px, 400);
+                // border: 2px solid blue;
+                text-align: center;
+                width: 85%;
+            }
+        }
+
+        @media screen and (max-width: 700px){
+            flex-direction: column;
+            margin-bottom: 64px;
+            .team-members-cards-infos {
+                margin-right: 0;
+                margin-bottom: 64px;
+                grid-template-columns: 1fr;
+                gap: 40px;
+    
+                .item {
+                    gap: 40px;
+                } 
+            }
+
+            .enlighten-your-friend {
+                width: 100%;
+                .illustrations {
+                    margin-bottom: 26px;
+                    .content {
+                        width: 335px;
+                        height: 408px;
+                        
+                        img.bulb {
+                            width: 91px;
+                            height: 86px;
+                            left: 20px;
+                        }
+                        .box {
+                            width: 246px;
+                            height: 290px;
+                        }
+                    }
+                }
+                .text {
+                    @include typography(24px, 400);
+                    width: 100%;
+                }
+            }
+    
+        }
+    }
+
+    /************************************
+            CONTACT SECTION STYLE
+    ***************************************/
+    .contact-section {
+        @include flexbox(flex-start, space-between, row);
+
+        .socials {
+            @include flexbox(flex-start, flex-start, column);
+
+            .download-logo {
+                width: 409px;
+                height: 220px;
+                padding: 24px 34px;
+                border-radius: 40px;
+                background-color: $bg-presse;
+                @include flexbox(flex-start, space-between, column);
+                margin-bottom: 64px;
+
+                &.light {
+                    background-color: $white;
+                }
+
+                .btn-presse {
+                    background-color: $primary;
+                    color: $white;
+                    padding: 8px;
+                    @include typography(18px, 600);
+                    border-radius: 14px;
+
+                    &.light {
+                        color: $color-black;
+                    }
+                }
+
+                p {
+                    @include typography(18px, 300);
+                }
+
+                .download {
+                    @include flexbox(center, flex-start, row);
+
+                    .download-button {
+                        background-color: $primary;
+                        padding: 8px;
+                        border-radius: 8px;
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 32px;
+                    }
+                    .file-infos {
+                        .size {
+                            @include typography(12px, 400);
+                        }
+                        .name {
+                            @include typography(18px, 400);
+                        }
+                    }
+                }
+            }
+            .icons {
+                @include flexbox(center, space-between, row);
+                width: 100%;
+                .flags img:first-child, .socials-icons a:first-child{
+                    margin-right: 22px;
+                }
+            }
+        }
+
+        .eclairia-shape {
+            @include flexbox(flex-start, flex-start, column);
+
+            img {
+                width: 121px;
+                height: 116px;
+
+                &:nth-child(2){
+                    transform: rotate(-31deg) matrix(0.86, 0.52, 0.52, -0.86, 0, 0);;
+                    opacity: .5;
+                    filter: blur(2px);
+                }
+            }
+        }
+
+        .contacts-invest {
+            
+            .contacts {
+                margin-bottom: 74px;
+                .newsletter {
+                    // border: 2px solid red;
+                    margin-bottom: 32px;
+                    label {
+                        @include typography(12px, 400);
+                        margin-left: 16px;
+                    }
+                    .field-container {
+                        // border: 2px solid red;
+                        position: relative;
+                        width: 309px;
+                        height: 44px;
+                        margin-top: 6px;
+                        input {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            border-radius: 16px;
+                            border: none;
+                            padding: 8px 16px;
+                            background-color: $bg-input-email;
+                            @include typography(16px, 600);
+                            color: $color-input-email;
+
+                            &.light {
+                                color: $white;
+                                
+                                &::placeholder {
+                                    color: $white;
+                                }
+                            }
+
+                            &::placeholder {
+                                color: $color-input-email;
+                            }
+                        }
+
+                        button {
+                            position: absolute;
+                            @include position(auto, 50%, 8px, auto, y);
+                            width: 28px;
+                            height: 28px;
+                            background-color: $bg-button-send-email;
+                            @include flexbox(center, center, row);
+                            border-radius: 8px;
+                        }
+                    }
+                }
+                .contact {
+                    @include flexbox(flex-start, flex-start, row);
+                    margin-bottom: 32px;
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        margin-right: 32px;
+                    }
+                    .contact-info {
+                        p {
+                            @include typography(18px, 400);
+
+                            &.category {
+                                @include typography(12px, 400);
+                            }
+                        }
+                    }
+                }
+            }
+
+            .invest {
+                background-color: $primary;
+                border-radius: 16px;
+                @include flexbox(center, space-between, row);
+                padding: 8px 8px 8px 16px;
+
+                p {
+                    @include typography(18px, 600);
+                }
+
+                button {
+                    box-shadow: $shadow-voice-btn;
+                    border-radius: 8px;
+                    padding: 2px;
+                }
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            flex-direction: column-reverse;
+            position: relative;
+
+            .socials {
+                @include flexbox(flex-start, flex-start, column);
+                width: 100%;
+    
+                .download-logo {
+                    height: 244px;
+                    width: 100%;
+                    background-color: rgba(0,7,34, .5);
+                }
+                .icons {
+                    img {
+                        width: 40px;
+                        height: 40px;
+                    }
+                    .flags img:first-child, .socials-icons a:first-child{
+                        margin-right: 8px;
+                    }
+                }
+            }
+
+            .eclairia-shape {
+                align-self: center;
+                position: absolute;
+                bottom: 0;
+                z-index: -20;
+            }
+
+              .contacts-invest {
+                width: 100%;
+                margin-bottom: 120px;
+                .contacts {
+                    .newsletter {
+                        width: 100%;
+                        .field-container {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+/************************************
+        FOOTER STYLE
+***************************************/
+footer {
+
+    @include flexbox(center, space-between, row);
+    @include typography(18px, 400);
+
+    .copyright {
+        text-transform: uppercase;
+    }
+
+    @media screen and (max-width: 700px){
+        @include typography(11px, 400);
+
+        p:last-child {
+            text-align: right;
+        }
+    }
+}
