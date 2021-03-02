@@ -36,7 +36,7 @@ hamburgerButton.addEventListener("click", function(){
 bulb.addEventListener("click", function(){
     let allDark = document.querySelectorAll(".dark");
     let dropdownIcon = document.querySelector(".dark-dropdown");
-    let searchIcon = document.querySelector(".search-icon img");
+    // let searchIcon = document.querySelector(".search-icon img");
     let appLink = document.querySelector(".eclairia-app-link img");
     let downloadButton = document.querySelector(".download-button img");
     let emailIcon = document.querySelector(".email-icon");
@@ -47,7 +47,7 @@ bulb.addEventListener("click", function(){
         el.classList.toggle("light");
         if(!el.classList.contains("light")){
             dropdownIcon.src = "svgs/arrow-down.svg";
-            searchIcon.src = "svgs/Search-icon.svg";
+            // searchIcon.src = "svgs/Search-icon.svg";
             appLink.src = "images/app-download.png";
             downloadButton.src= "svgs/download.svg";
             emailIcon.src = "svgs/email-icon.svg";
@@ -55,7 +55,7 @@ bulb.addEventListener("click", function(){
             voiceIcon.src = "svgs/voice-icon.svg";
         } else {   
             dropdownIcon.src = "svgs/arrow-down-light.svg";
-            searchIcon.src = "svgs/Search-light.svg";
+            // searchIcon.src = "svgs/Search-light.svg";
             appLink.src = "images/app-download-light.png";
             downloadButton.src= "svgs/download-light.svg";
             emailIcon.src = "svgs/frame49-light.svg";
